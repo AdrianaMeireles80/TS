@@ -1,0 +1,241 @@
+﻿Questões Ilustrativas para o Teste
+
+1-Descreva três tipos de vulnerabilidades comuns no 
+domínio do software e exemplifique como podem ser 
+exploradas para subverter o controlo de uma aplicação.
+
+#----------------------- ANSWER -----------------------#
+
+SQL injection
+Permite ao atacante alterar statements de SQL no backend
+manipulando dados introduzidos pelo utilizador.
+A injection ocorre quando o input do utilizador é 
+enviado para o interpretador como parte do comando ou 
+query e "engana" o interpretador executando comandos
+adicionais e dando acesso a dados não autorizados. 
+
+Cross Site Scripting (XSS)
+Vulnerabilidades XSS têm como alvo scripts embedded 
+numa página que são executados no client side, ou seja
+no browser do utilizador em vez do server side.
+Atacantes podem usar XSS para executar scripts 
+maliciosos nos browsers dos utilizadores. Como um 
+browser não pode saber se um script é confiável ou não,
+o script é executado, e o atacante pode aceder a session
+cookies, alterar websites, ou redirecionar o utilizador
+para websites maliciosos.
+
+Cross Site Request Forgery (CSRF)
+Um ataque CSRF é um ataque que ocorre quando um website,
+email ou programa malicioso causa um browser de um 
+utilizador a executar uma ação indesejada em um 
+site confiável onde o utilizador está autenticado.
+CSRF força o browser da vitima que se encontra logged-in
+a enviar um request HTTP forjado, que inclui a 
+session cookie da vitima e qualquer outra informação
+de autenticação que é automaticamente incluida, para 
+uma aplicação web vulnerável. 
+
+
+outras vulnerabilidades : 
+https://www.guru99.com/web-security-vulnerabilities.html
+
+
+#------------------------------------------------------#
+
+2- Descreva sumariamente os principais mecanismos de 
+protecção do Unix clássico. Tenha em atenção a 
+necessidade de suportar múltiplos utilizadores, 
+processos, dispositivos e recursos(reais e virtuais)
+
+
+#----------------------- ANSWER -----------------------#
+
+Sistema de permissões- Algumas tarefas apenas devem 
+ser executadas por administradores do sistema de forma
+a preservar o bom funcionamento do sistema. Certas 
+ações podem ser realizadas apenas por um grupo especifico
+de utilizadores e outras para um utilizador especifico.
+Root -> Group -> Utilizador(Others)
+
+Passwords - Uma palavra passe forte e um sitio onde a 
+guardar de forma correta é uma das coisas mais 
+importantes para um sistema Unix. Em sistemas Unix, 
+a informação sobre utilizadores encontra-se guardada
+no ficheiro /etc/passwd (utilizadores registados e 
+hashes das passwords cada entrada ocupa 1 linha no 
+ficheiro). 
+Como todos os utilizadores tinham de ter 
+acesso de ler a este ficheiro era possível ler as hashes
+dos outros utilizadores. Para evitar isto foi criado 
+o ficheiro /etc/shadow onde estao guardadas as password
+hashes e que só o root é que tem read access. 
+
+Software -A comunidade Unix faz um esforço coletivo
+para manter os repositórios disponiveis e atualizados, 
+corrigindo o vulnerabilidades o mais rápido possível.
+Mesmo assim software que não seja necessário deve ser
+removido completamente, se possivel. 
+
+File system security - Baseia-se em 9 permission bits,
+set user e group ID bits e o sticky bit, para um total
+de 12 bits. Estas permissões aplicam-se quase igualmente
+a todos os objetos no filesystem como ficheiros, 
+diretorias e dispositivos. 
+-
+9 permission bits divididos em 3 grupos com 3 bits cada.
+Primeiro grupo descreve permissões do dono do ficheiro
+segundo grupo descreve permissões do grupo associado 
+com o dono do ficheiro ou com a diretoria que contem 
+o ficheiro, e o terceiro grupo descreve permissões 
+associadas com qualquer processo que não tem o mesmo
+user ID do ficheiro. Cada grupo tem 3 bits que contêm
+bit que indica acesso read, write ou execute. 
+-
+Set user ID e set group ID bits, são usados para mudar
+a identidade do processo que executa o ficheiro. 
+Set user ID permite que o processo execute o ficheiro 
+com o mesmo user ID do dono do ficheiro temporariamente.
+Set group ID permite que o processo execute o ficheiro
+com o mesmo group ID do grupo do ficheiro.
+-
+Sticky bit é um bit que indica o estilo de restrição 
+de ficheiro (file locking) a ser usado. No caso de 
+diretorias  previne qualquer processo que não seja o 
+que tem privilegios super-user ou que tenha user ID
+do dono do ficheiro de eliminar o ficheiro dessa 
+diretoria.
+
+#------------------------------------------------------#
+
+
+
+
+3- Descreva os conceitos e relações entre attack, exploit,
+threat e vulnerability.
+
+#----------------------- ANSWER -----------------------#
+
+Attack: Acto intencional (ou não), que pode danificar ou 
+comprometer informação e os sistemas que a suportam
+
+Exploit: Técnica usada para comprometer um sistema
+
+Threat: Categoria de objetos, pessoas, ou outras
+entidades que representam perigo a um asset (recurso 
+protegido)
+
+Vulnerability: Uma fraqueza ou falha no sistema ou 
+mecanismo de proteção que abre o sistema para um ataque
+ou para ser danificado.
+
+Relacionam-se da seguinte forma:
+Uma entidade possui um asset (recurso protegido) contida
+num certo sistema. Um atacante (threat) utiliza uma 
+técnica para comrpometer o sistema (exploit), que tira 
+vantagem  de uma vulnerabilidade no mesmo 
+(vulnerability), e rouba/danifica o asset 
+protegido (attack).
+
+#------------------------------------------------------#
+
+4- Na atividade de Pentesting, descreva as técnicas de 
+footprint usadas no TP2 (parte A e B)
+
+#----------------------- ANSWER -----------------------#
+
+Parte A- Reconnaissance -> Conhecer o alvo a atacar, 
+as pessoas que estão encarregues dos sistemas, o
+software utilizado, como está implementado...
+
+Parte B- Scanning -> Verificar que ports estão abertas,
+que tipo de sistema operativo esta a usar, que serviços 
+estão disponíveis no sistema, informação da versão de 
+aplicação, realizar um scan por vulnerabilidades...
+
+#------------------------------------------------------#
+
+
+Questões que saíram a MFES
+
+1- 3 vulnerabilidades (ver acima)
+
+#----------------------- ANSWER -----------------------#
+
+
+SQL Injection, XSS, CSRF
+
+#------------------------------------------------------#
+
+
+2- Mecanismo de autorização no sistema de ficheiros 
+Linux usando libfuse
+
+#----------------------- ANSWER -----------------------#
+
+Pedir autenticação quando certas operações de ficheiro 
+são realizadas por exemplo open, read, write e execute.
+No nosso caso enviar email para o utilizador atual,
+pedir um código quando ele tentar abrir e se for o 
+código correto permitir que o utilizador o abra senão
+negar acesso ao ficheiro.
+
+#------------------------------------------------------#
+
+
+3- setuid o que é e como é que um atacante pode explorar
+
+#----------------------- ANSWER -----------------------#
+
+setuid ou set user ID upon execution, é flags de direito
+de acesso do sistema Unix que permite utilizadores correr
+um executável com as permissões do dono do executável, 
+normalmente usado para permitir utilizadores num 
+sistema correr um programa com privilegios elevados 
+temporariamente de forma a fazer uma certa tarefa.
+
+Devemos ter cuidado de forma a evitar vulnerabilidades 
+de segurança como buffer overruns e path injection. 
+Um ataque de buffer-overrun bem sucedido numa aplicação g
+vulnerável permite ao atacante executar código 
+arbitrário sob os direitos do processo que foi exploited
+Caso o processo corra com privilegios root então o 
+atacante vai ter acesso root ao sistema onde este 
+processo está a correr.
+
+#------------------------------------------------------#
+
+
+4- O que é repúdio, exemplo e como contornar
+
+#----------------------- ANSWER -----------------------#
+
+Repúdio- Acto de negar ser autor de algo que aconteceu
+Envio de algum tipo de mensagem por um canal inseguro.
+Contornar através do uso de certificados por exemplo. 
+
+#------------------------------------------------------#
+
+
+5- Análise de um CVE
+
+#----------------------- ANSWER -----------------------#
+
+CVE tem a data, um número que o identifica, o tipo,
+o impacto que o problema tem (Severidade e outras
+métricas), o componente da exploit, uma descrição da
+exploit.
+
+#------------------------------------------------------#
+
+
+6- Análise do resultado de um scan nmap -O
+
+#----------------------- ANSWER -----------------------#
+
+Identificação do sistema operativo em uso, a maior
+parte das exploits estão escritas para um OS especifico,
+o que torna descobrir que OS está a ser utilizado
+essencial para descobrir possíveis vulnerabilidades 
+no alvo.
+#------------------------------------------------------#
